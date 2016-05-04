@@ -54,10 +54,10 @@
 	if(!self.isInitialized){
 		self.plotPadding = 1.f;
 		if(self.padding != nil){
-			self.paddingTop    = [self.padding[0] floatValue];
-			self.paddingRight  = [self.padding[1] floatValue];
-			self.paddingBottom = [self.padding[2] floatValue];
-			self.paddingLeft   = [self.padding[3] floatValue];
+            self.paddingLeft   = [self.padding[0] floatValue];
+			self.paddingTop    = [self.padding[1] floatValue];
+			self.paddingRight  = [self.padding[2] floatValue];
+			self.paddingBottom = [self.padding[3] floatValue];
 		}
 
 		if(self.series!=nil){
@@ -260,7 +260,8 @@
                 NSMutableDictionary *md = [NSMutableDictionary dictionary];
                 md[NSFontAttributeName] = [UIFont systemFontOfSize:12];
                 md[NSForegroundColorAttributeName] =[UIColor grayColor];
-                [text drawAtPoint:CGPointMake(sec.frame.origin.x+sec.paddingLeft+2+w,sec.frame.origin.y) withAttributes:md];
+                text = [@" " stringByAppendingString:text];
+                [text drawAtPoint:CGPointMake(sec.frame.origin.x+sec.paddingLeft+2+w,sec.frame.origin.y+2) withAttributes:md];
                 w += [text sizeWithAttributes:md].width;
 			}
 		}

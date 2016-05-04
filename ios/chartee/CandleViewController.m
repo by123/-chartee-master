@@ -48,8 +48,9 @@
     self.req_url    = @"http://ichart.yahoo.com/table.csv?s=%@&g=%@";
     self.req_security_id = @"000651.SZ";
     
+    CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
     //candleChart
-    self.candleChart = [[Chart alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    self.candleChart = [[Chart alloc] initWithFrame:CGRectMake(0, rectStatus.size.height, self.view.frame.size.width, self.view.frame.size.height - rectStatus.size.height)];
     self.candleChart.hidden = YES;
     [self.view addSubview:self.candleChart];
     [self initChart];
@@ -63,7 +64,7 @@
 }
 
 -(void)initChart{
-    NSMutableArray *padding = [@[@"20", @"20", @"20", @"20"] mutableCopy];
+    NSMutableArray *padding = [@[@"5", @"0", @"5", @"0"] mutableCopy];
     [self.candleChart setPadding:padding];
     NSMutableArray *secs = [[NSMutableArray alloc] init];
     [secs addObject:@"2"];
@@ -101,6 +102,23 @@
     [series addObject:serie];
     [secOne addObject:serie];
 
+    //VOL
+    serie = [[NSMutableDictionary alloc] init];
+    data = [[NSMutableArray alloc] init];
+    serie[@"name"] = @"vol";
+    serie[@"label"] = @"VOL";
+    serie[@"data"] = data;
+    serie[@"type"] = @"column";
+    serie[@"yAxis"] = @"0";
+    serie[@"section"] = @"1";
+    serie[@"decimal"] = @"0";
+    serie[@"color"] = @"176,52,52";
+    serie[@"negativeColor"] = @"77,143,42";
+    serie[@"selectedColor"] = @"176,52,52";
+    serie[@"negativeSelectedColor"] = @"77,143,42";
+    [series addObject:serie];
+    [secTwo addObject:serie];
+    
     //MA10
     serie = [[NSMutableDictionary alloc] init];
     data = [[NSMutableArray alloc] init];
@@ -115,7 +133,7 @@
     serie[@"selectedColor"] = @"255,255,255";
     serie[@"negativeSelectedColor"] = @"255,255,255";
     [series addObject:serie];
-    [secOne addObject:serie];
+    [secTwo addObject:serie];
 
     //MA30
     serie = [[NSMutableDictionary alloc] init];
@@ -131,7 +149,7 @@
     serie[@"selectedColor"] = @"250,232,115";
     serie[@"negativeSelectedColor"] = @"250,232,115";
     [series addObject:serie];
-    [secOne addObject:serie];
+    [secTwo addObject:serie];
 
     //MA60
     serie = [[NSMutableDictionary alloc] init];
@@ -146,24 +164,6 @@
     serie[@"negativeColor"] = @"232,115,250";
     serie[@"selectedColor"] = @"232,115,250";
     serie[@"negativeSelectedColor"] = @"232,115,250";
-    [series addObject:serie];
-    [secOne addObject:serie];
-
-
-    //VOL
-    serie = [[NSMutableDictionary alloc] init];
-    data = [[NSMutableArray alloc] init];
-    serie[@"name"] = @"vol";
-    serie[@"label"] = @"VOL";
-    serie[@"data"] = data;
-    serie[@"type"] = @"column";
-    serie[@"yAxis"] = @"0";
-    serie[@"section"] = @"1";
-    serie[@"decimal"] = @"0";
-    serie[@"color"] = @"176,52,52";
-    serie[@"negativeColor"] = @"77,143,42";
-    serie[@"selectedColor"] = @"176,52,52";
-    serie[@"negativeSelectedColor"] = @"77,143,42";
     [series addObject:serie];
     [secTwo addObject:serie];
 
